@@ -39,6 +39,12 @@ import (
 	"os/exec"
 )
 
+var (
+	FirefoxProfiles = []string{os.Getenv("HOME") + "/.mozilla/firefox/*",
+		os.Getenv("HOME") + "/snap/firefox/common/.mozilla/firefox/*"}
+	NSSBrowsers = "Firefox and/or Chromium"
+)
+
 const (
 	// caFolderName defines the name of the folder where the root CA certificate and key are stored.
 	caFolderName = "certs"
@@ -115,9 +121,4 @@ func (cs *DiskCertStore) uninstallCATrust() error {
 	}
 
 	return nil
-}
-
-func pathExists(path string) bool {
-	_, err := os.Stat(path)
-	return err == nil
 }

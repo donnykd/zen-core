@@ -109,6 +109,9 @@ func (cs *DiskCertStore) Init() error {
 	if err := cs.installCATrust(); err != nil {
 		return fmt.Errorf("install CA from system trust store: %v", err)
 	}
+	if err := cs.installNSS(); err != nil {
+		return fmt.Errorf("install CA from NSS database: %v", err)
+	}
 	cs.caStatusManager.SetCAInstalled(true)
 
 	return nil
@@ -130,6 +133,9 @@ func (cs *DiskCertStore) UninstallCA() error {
 
 	if err := cs.uninstallCATrust(); err != nil {
 		return fmt.Errorf("uninstall CA from system trust store: %w", err)
+	}
+	if err := cs.uninstallNSS(); err != nil {
+		return fmt.Errorf("uninstall CS from NSS database: %v", err)
 	}
 	if err := os.RemoveAll(cs.folderPath); err != nil && !os.IsNotExist(err) {
 		return fmt.Errorf("remove CA folder: %w", err)
@@ -260,4 +266,9 @@ func (cs *DiskCertStore) loadCA() error {
 	}
 
 	return nil
+}
+
+func pathExists(path string) bool {
+	_, err := os.Stat(path)
+	return err == nil
 }
