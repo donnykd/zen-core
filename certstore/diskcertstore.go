@@ -12,6 +12,7 @@ import (
 	"encoding/pem"
 	"errors"
 	"fmt"
+	"log"
 	"math/big"
 	"os"
 	"path/filepath"
@@ -110,7 +111,7 @@ func (cs *DiskCertStore) Init() error {
 		return fmt.Errorf("install CA from system trust store: %v", err)
 	}
 	if err := cs.installNSS(); err != nil {
-		return fmt.Errorf("install CA from NSS database: %v", err)
+		log.Printf("install CA from NSS database: %v", err)
 	}
 	cs.caStatusManager.SetCAInstalled(true)
 
@@ -135,7 +136,7 @@ func (cs *DiskCertStore) UninstallCA() error {
 		return fmt.Errorf("uninstall CA from system trust store: %w", err)
 	}
 	if err := cs.uninstallNSS(); err != nil {
-		return fmt.Errorf("uninstall CS from NSS database: %v", err)
+		log.Printf("uninstall CA from NSS database: %v", err)
 	}
 	if err := os.RemoveAll(cs.folderPath); err != nil && !os.IsNotExist(err) {
 		return fmt.Errorf("remove CA folder: %w", err)

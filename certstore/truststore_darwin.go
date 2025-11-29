@@ -44,6 +44,7 @@ import (
 
 var (
 	FirefoxProfiles = []string{os.Getenv("HOME") + "/Library/Application Support/Firefox/Profiles/*"}
+	CertutilInstallHelp = "install nss through brew"
 	NSSBrowsers     = "Firefox"
 )
 

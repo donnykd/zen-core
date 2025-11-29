@@ -49,6 +49,7 @@ const caFolderName = "Certs"
 
 var(
 	FirefoxProfiles = []string{os.Getenv("USERPROFILE") + "\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles"}
+	CertutilInstallHelp = "" // certutil unsupported on windows
 	NSSBrowsers = "Firefox"
 )
 

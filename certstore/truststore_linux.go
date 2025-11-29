@@ -42,7 +42,8 @@ import (
 var (
 	FirefoxProfiles = []string{os.Getenv("HOME") + "/.mozilla/firefox/*",
 		os.Getenv("HOME") + "/snap/firefox/common/.mozilla/firefox/*"}
-	NSSBrowsers = "Firefox and/or Chromium"
+	CertutilInstallHelp = "install nss through your package manager"
+	NSSBrowsers         = "Firefox and/or Chromium"
 )
 
 const (
