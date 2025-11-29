@@ -91,13 +91,9 @@ func (cs *DiskCertStore) checkNSS() bool {
 }
 
 func (cs *DiskCertStore) installNSS() error {
-	hasNSS, hasCertutil, certutilPath := getNSSInfo()
+	hasNSS, _, certutilPath := getNSSInfo()
 	if !hasNSS {
 		return fmt.Errorf("no NSS browsers found")
-	}
-
-	if !hasCertutil {
-		return fmt.Errorf("no certutil found")
 	}
 
 	if cs.forEachNSSProfile(func(profile string) {
